@@ -7,13 +7,16 @@ import { Gasto } from '../models/gasto';
 })
 export class GastoService {
   selectedGasto: Gasto;
-  constructor(private http: HttpClient) {
+  gastos: Gasto[] = [];
+
+  readonly URL_API='http://localhost:3000/api/gastos';
+
+  constructor(public http: HttpClient) {
     this.selectedGasto = new Gasto();
   }
   getGastos() {
     return this.http.get('http://localhost:3000/api/gastos');
   }
-  readonly URL_API = 'http://localhost:3000/api/gastos';
   postGasto(Gasto: Gasto) {
     return this.http.post(this.URL_API, Gasto);
   }
@@ -23,6 +26,7 @@ export class GastoService {
   deleteGasto(_id: string) {
     return this.http.delete(this.URL_API + '/${_id}');
   }
+  
 }
 
 
